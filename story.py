@@ -6,14 +6,14 @@ import openai
 import streamlit as st
 import time
 import re
-
+from datetime import datetime, timezone, timedelta  
 
 # 加载.env文件  
 load_dotenv("en1106.env")  
 
 os.environ["OPENAI_API_TYPE"] = os.environ["Azure_OPENAI_API_TYPE1"]
 os.environ["OPENAI_API_BASE"] = os.environ["Azure_OPENAI_API_BASE1"]
-os.environ["OPENAI_API_KEY"] =  os.environ["Azure_OPENAI_API_KEY1"]
+os.environ["OPENAI_API_KEY"] = st.secrets["key"]
 os.environ["OPENAI_API_VERSION"] = os.environ["Azure_OPENAI_API_VERSION1"]
 BASE_URL=os.environ["OPENAI_API_BASE"]
 API_KEY=os.environ["OPENAI_API_KEY"]
@@ -89,6 +89,10 @@ model=st.sidebar.selectbox(
     ( "gpt-35-turbo-1106", "gpt-4"))
 if not key:
     st.info("Please add your key to continue.")
+    st.stop()
+elif str(datetime.now(timezone(timedelta(hours=8))).hour)!=key:
+    st.info("Please input valid key to continue.")
+    st.stop()
 else:
     st.session_state.key=key    
 
