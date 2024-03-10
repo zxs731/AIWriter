@@ -157,12 +157,12 @@ if prompt := st.chat_input():
             
         pre_msg=None
         for i in range(1, int(j["count_of_chapter"])+1):  
-            user_msg={"role":"user","content":f'''
+            user_msg={"role":"user","content":f'''按照如下信息写作指定章节。
 标题:{j["title"]}
 背景:{j["background"]}
 章节列表:{j["toc"]}
 选定的章节:第{i}章
-按照上述要求编写虚构小说的选定章节内容。'''}
+按照上述要求编写选定章节内容。'''}
             if pre_msg is not None:
                 res=getLLMResponse([sys_msg]+pre_msg+[user_msg],tools=None,checkMinResponseLength=100) 
             else:
