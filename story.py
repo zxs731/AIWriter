@@ -157,7 +157,7 @@ if prompt := st.chat_input():
             
         pre_msg=None
         for i in range(1, int(j["count_of_chapter"])+1):  
-            user_msg={"role":"user","content":f'''写作要求:{requirement}
+            user_msg={"role":"user","content":f'''
 标题:{j["title"]}
 背景:{j["background"]}
 章节列表:{j["toc"]}
